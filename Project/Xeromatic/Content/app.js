@@ -15,12 +15,12 @@ var App = React.createClass({
 	//React function that runs after the app first loads
 	componentDidMount: function() {
 		var self = this;
-		fetch('/pinnedTweets', {method: 'get'})
+		fetch('/recentTweets', {method: 'get'}) 
 			.then(function(response) {
 				return response.json();
 			})
 			.then(function(data) {
-				self.setState({tweets: data});
+				self.setState({tweets: data}); //reference to line 12
 			})
 			.catch(function(error) {
 				console.error('Error', error);
@@ -29,7 +29,8 @@ var App = React.createClass({
 
 	//React function that runs on first load and whenever the state is changed
 	render: function() {
-		var tweets = (this.state.tweets.length > 0) ? this.state.tweets.map(function(tweet) {
+	    var tweets = (this.state.tweets.length > 0) ? this.state.tweets.map(function(tweet) { 
+	        // if there are tweets that exist, render is grabbing those tweets
 			return <Tweet key={tweet.Id} text={tweet.Text} />
 			})
 			: null;
@@ -49,4 +50,4 @@ var App = React.createClass({
 });
 
 //This function will render our App to the page
-ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(<App />, document.getElementById('app')); //looking for div with name app on index.cshtml
